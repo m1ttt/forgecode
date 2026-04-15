@@ -1,0 +1,20 @@
+[package]
+name = "artemis_snaps"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+artemis_fs.workspace = true
+fnv_rs.workspace = true
+serde.workspace = true
+uuid = { workspace = true, features = ["v4", "serde"] }
+chrono.workspace = true
+tokio = { workspace = true }
+
+artemis_domain.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["macros", "rt", "time", "test-util"] }
+tempfile.workspace = true

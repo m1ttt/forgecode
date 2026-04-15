@@ -4,10 +4,10 @@
 
 set -e
 
-FORGE_BIN="${1:-./target/debug/forge}"
+ARTEMIS_BIN="${1:-./target/debug/artemis}"
 
-if [ ! -f "$FORGE_BIN" ]; then
-    echo "Error: forge binary not found at $FORGE_BIN"
+if [ ! -f "$ARTEMIS_BIN" ]; then
+    echo "Error: forge binary not found at $ARTEMIS_BIN"
     echo "Usage: $0 [path-to-forge-binary]"
     exit 1
 fi
@@ -46,56 +46,56 @@ print_runtime() {
 
 # Agent list
 print_section "AGENTS"
-print_command "$FORGE_BIN list agent --porcelain"
+print_command "$ARTEMIS_BIN list agent --porcelain"
 start=$(date +%s%N)
-$FORGE_BIN list agent --porcelain 2>&1 | head -20 || echo "No agents found"
+$ARTEMIS_BIN list agent --porcelain 2>&1 | head -20 || echo "No agents found"
 print_runtime "$start"
 
 # Provider list
 print_section "PROVIDERS"
-print_command "$FORGE_BIN list provider --porcelain"
+print_command "$ARTEMIS_BIN list provider --porcelain"
 start=$(date +%s%N)
-$FORGE_BIN list provider --porcelain 2>&1 | head -20 || echo "No providers found"
+$ARTEMIS_BIN list provider --porcelain 2>&1 | head -20 || echo "No providers found"
 print_runtime "$start"
 
 # # Model list
 # print_section "MODELS"
-# print_command "$FORGE_BIN list model --porcelain"
-# $FORGE_BIN list model --porcelain 2>&1 | head -20 || echo "No models found"
+# print_command "$ARTEMIS_BIN list model --porcelain"
+# $ARTEMIS_BIN list model --porcelain 2>&1 | head -20 || echo "No models found"
 
 # Config list
 print_section "CONFIG"
-print_command "$FORGE_BIN list config --porcelain"
+print_command "$ARTEMIS_BIN list config --porcelain"
 start=$(date +%s%N)
-$FORGE_BIN list config --porcelain 2>&1 | head -20 || echo "No config found"
+$ARTEMIS_BIN list config --porcelain 2>&1 | head -20 || echo "No config found"
 print_runtime "$start"
 
 # MCP servers list
 print_section "MCP SERVERS"
-print_command "$FORGE_BIN list mcp --porcelain"
+print_command "$ARTEMIS_BIN list mcp --porcelain"
 start=$(date +%s%N)
-$FORGE_BIN list mcp --porcelain 2>&1 | head -20 || echo "No MCP servers found"
+$ARTEMIS_BIN list mcp --porcelain 2>&1 | head -20 || echo "No MCP servers found"
 print_runtime "$start"
 
 # Conversation list
 print_section "CONVERSATIONS"
-print_command "$FORGE_BIN list conversation --porcelain"
+print_command "$ARTEMIS_BIN list conversation --porcelain"
 start=$(date +%s%N)
-$FORGE_BIN list conversation --porcelain 2>&1 | head -20 || echo "No conversations found"
+$ARTEMIS_BIN list conversation --porcelain 2>&1 | head -20 || echo "No conversations found"
 print_runtime "$start"
 
 # Custom commands list
 print_section "CUSTOM COMMANDS"
-print_command "$FORGE_BIN list cmd --porcelain"
+print_command "$ARTEMIS_BIN list cmd --porcelain"
 start=$(date +%s%N)
-$FORGE_BIN list cmd --porcelain 2>&1 | head -20 || echo "No custom commands found"
+$ARTEMIS_BIN list cmd --porcelain 2>&1 | head -20 || echo "No custom commands found"
 print_runtime "$start"
 
 # Skills list
 print_section "SKILLS"
-print_command "$FORGE_BIN list skill --porcelain"
+print_command "$ARTEMIS_BIN list skill --porcelain"
 start=$(date +%s%N)
-$FORGE_BIN list skill --porcelain 2>&1 | head -20 || echo "No skills found"
+$ARTEMIS_BIN list skill --porcelain 2>&1 | head -20 || echo "No skills found"
 print_runtime "$start"
 
 # Summary

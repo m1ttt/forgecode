@@ -21,6 +21,9 @@
 {{/if}}
 - NEVER ever refer to tool names when speaking to the USER even when user has asked for it. For example, instead of saying 'I need to use the edit_file tool to edit your file', just say 'I will edit your file'.
 - If you need to read a file, prefer to read larger sections of the file at once over multiple smaller calls.
+- If you start a background shell job and receive a `job_id`, end that tool phase immediately and return control to the user instead of waiting inside the same turn.
+- After starting a background shell job, do NOT issue extra shell commands like `wait`, `sleep`, `jobs`, or a second copy of the same command just to check progress.
+- Only inspect that background job again when the user asks for progress/results or when the next step strictly depends on the command having finished; in that case, reuse the same `job_id` with poll or wait.
 </tool_usage_instructions>
 
 {{#if custom_rules}}

@@ -22,17 +22,17 @@ FAIL=0
 
 # Resolve the forge binary (prefer local debug build)
 SCRIPT_DIR="${0:A:h}"
-FORGE_BIN="${FORGE_BIN:-${SCRIPT_DIR}/../target/debug/forge}"
+ARTEMIS_BIN="${ARTEMIS_BIN:-${SCRIPT_DIR}/../target/debug/artemis}"
 
-if [[ ! -x "$FORGE_BIN" ]]; then
-    echo "${RED}forge binary not found at ${FORGE_BIN}${RESET}"
-    echo "Run: cargo build -p forge_main"
+if [[ ! -x "$ARTEMIS_BIN" ]]; then
+    echo "${RED}forge binary not found at ${ARTEMIS_BIN}${RESET}"
+    echo "Run: cargo build -p artemis_main"
     exit 1
 fi
 
 # Wrapper that calls the Rust formatter
 function format() {
-    "$FORGE_BIN" zsh format --buffer "$1"
+    "$ARTEMIS_BIN" zsh format --buffer "$1"
 }
 
 # Create temporary files for testing paths with spaces

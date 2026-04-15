@@ -2,7 +2,7 @@
 
 # Custom completion widget that handles both :commands and @ completion
 
-function forge-completion() {
+function artemis-completion() {
     local current_word="${LBUFFER##* }"
     
     # Handle @ completion (files and directories)
@@ -10,15 +10,15 @@ function forge-completion() {
         local filter_text="${current_word#@}"
         local selected
         local fzf_args=(
-            --preview="if [ -d {} ]; then ls -la --color=always {} 2>/dev/null || ls -la {}; else $_FORGE_CAT_CMD {}; fi"
-            $_FORGE_PREVIEW_WINDOW
+            --preview="if [ -d {} ]; then ls -la --color=always {} 2>/dev/null || ls -la {}; else $_ARTEMIS_CAT_CMD {}; fi"
+            $_ARTEMIS_PREVIEW_WINDOW
         )
         
-        local file_list=$(${FORGE_BIN:-forge} list files --porcelain)
+        local file_list=$(${ARTEMIS_BIN:-artemis} list files --porcelain)
         if [[ -n "$filter_text" ]]; then
-            selected=$(echo "$file_list" | _forge_fzf --query "$filter_text" "${fzf_args[@]}")
+            selected=$(echo "$file_list" | _artemis_fzf --query "$filter_text" "${fzf_args[@]}")
         else
-            selected=$(echo "$file_list" | _forge_fzf "${fzf_args[@]}")
+            selected=$(echo "$file_list" | _artemis_fzf "${fzf_args[@]}")
         fi
         
         if [[ -n "$selected" ]]; then
@@ -38,14 +38,14 @@ function forge-completion() {
         local filter_text="${LBUFFER#:}"
         
         # Lazily load the commands list
-        local commands_list=$(_forge_get_commands)
+        local commands_list=$(_artemis_get_commands)
         if [[ -n "$commands_list" ]]; then
             # Use fzf for interactive selection with prefilled filter
             local selected
             if [[ -n "$filter_text" ]]; then
-                selected=$(echo "$commands_list" | _forge_fzf --header-lines=1 --delimiter="$_FORGE_DELIMITER" --nth=1 --query "$filter_text" --prompt="Command ❯ ")
+                selected=$(echo "$commands_list" | _artemis_fzf --header-lines=1 --delimiter="$_ARTEMIS_DELIMITER" --nth=1 --query "$filter_text" --prompt="Command ❯ ")
             else
-                selected=$(echo "$commands_list" | _forge_fzf --header-lines=1 --delimiter="$_FORGE_DELIMITER" --nth=1 --prompt="Command ❯ ")
+                selected=$(echo "$commands_list" | _artemis_fzf --header-lines=1 --delimiter="$_ARTEMIS_DELIMITER" --nth=1 --prompt="Command ❯ ")
             fi
             
             if [[ -n "$selected" ]]; then
